@@ -9,22 +9,68 @@ import {
   Input,
   Button,
   Row,
-  Col
+  Col,
 } from "reactstrap";
+import image1 from "../images/image1.jpg";
 import Base from "../components/Base";
+import { useState } from "react";
 const Signup = () => {
+  const [data,setData] = useState({
+    name:'',
+    email:'',
+    password:'',
+    about:''
+  })
+
+  // const [error,setError] = userState(
+  //   {
+       
+  //   }
+  // )
+
+ const handleChange = (event,prop) => {
+   setData({...data,[prop]:event.target.value})
+ }
+ 
+ const change = () => {
+   setData({
+    name:'',
+    email:'',
+    password:'',
+    about:''
+ })
+ }
+
+ const afterSubmitOp = (event) => 
+ {
+   event.preventDefault();
+   console.log(data);
+ }
+
   return (
     <Base>
-      <div className="mt-5">
+      <div
+        style={{
+          backgroundImage: `url(${image1})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          width: "100vw",
+          height: "94vh",
+        }}
+        >
         <Row>
-          <Col sm={{size:6,offset:3}}>
-            <Container>
-              <Card>
+          <Col sm={{ size: 4}}>
+            <Container style={{
+              marginTop: "100px"
+            }}>
+              {JSON.stringify(data)}
+              <Card color="dark" inverse>
                 <CardHeader>
                   <h3>SignUp</h3>
                 </CardHeader>
                 <CardBody>
-                  <Form>
+                  <Form onSubmit={e => afterSubmitOp(e)}>
                     <FormGroup>
                       <Label for="name">Name</Label>
                       <Input
@@ -32,6 +78,8 @@ const Signup = () => {
                         name="name"
                         placeholder="write your name"
                         type="text"
+                        onChange={e => handleChange(e,'name')}
+                        value={data.name}
                       />
                     </FormGroup>
                     <FormGroup>
@@ -41,6 +89,8 @@ const Signup = () => {
                         name="email"
                         placeholder="write your email"
                         type="text"
+                        onChange={e => handleChange(e,'email')}
+                        value={data.email}
                       />
                     </FormGroup>
                     <FormGroup>
@@ -50,6 +100,8 @@ const Signup = () => {
                         name="password"
                         placeholder="write a password"
                         type="text"
+                        onChange={e => handleChange(e,'password')}
+                        value={data.password}
                       />
                     </FormGroup>
                     <FormGroup>
@@ -59,11 +111,15 @@ const Signup = () => {
                         name="about"
                         placeholder="tell us someting about you..."
                         type="text"
+                        onChange={e => handleChange(e,'about')}
+                        value={data.about}
                       />
                     </FormGroup>
                     <div className="text-center">
-                      <Button color="primary">Click Me</Button>
-                      <Button color="secondary" className="ms-2">
+                      <Button color="light" outline>
+                        SignUp
+                      </Button>
+                      <Button onClick={change} color="secondary" className="ms-2" outline>
                         Reset
                       </Button>
                     </div>

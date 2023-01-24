@@ -19,7 +19,9 @@ const CustomNavbar = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <div style={{
+      width:"100vw"
+    }}>
       <Navbar color="dark" dark expand="md" fixed="">
         <NavbarBrand tag={ReactLink} to="/">BlogApp</NavbarBrand>
         <NavbarToggler onClick={toggle} />
